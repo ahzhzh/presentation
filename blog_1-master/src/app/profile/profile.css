@@ -1,13 +1,61 @@
 .profileContainer {
-    max-width: 600px; /* 최대 너비 */
-    margin: 50px auto; /* 중앙 정렬 및 상단 여백 */
-    padding: 30px; /* 내부 여백 */
-    border: 1px solid #ccc; /* 테두리 */
-    border-radius: 8px; /* 둥근 모서리 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  }
-  
-  .profileDetail {
-    font-size: 18px; /* 글자 크기 */
-  }
-  
+  max-width: 600px; /* 최대 너비 */
+  margin: 50px auto; /* 중앙 정렬 및 상단 여백 */
+  padding: 0; /* 내부 여백 제거 */
+  background-color: transparent; /* 투명 배경 */
+}
+
+.title {
+  font-size: 24px; /* 타이틀 글자 크기 */
+  color: #000; /* 타이틀 색상 흰색 */
+  text-align: center; /* 중앙 정렬 */
+  margin-bottom: 20px; /* 아래 여백 */
+}
+
+
+
+.profileDetail {
+  font-size: 16px; /* 글자 크기 */
+  color: #000; /* 글자 색상 흰색 */
+  line-height: 1.6; /* 줄 간격 */
+}
+
+.profilePicture {
+  width: 100px; /* 사진 크기 */
+  height: 100px; /* 사진 높이 */
+  border-radius: 50%; /* 둥글게 만들기 */
+  margin-bottom: 20px; /* 아래 여백 */
+  border: 3px solid #0070f3; /* 테두리 색상 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 사진 그림자 */
+}
+
+.profileActions {
+  margin-top: 20px; /* 위 여백 */
+  display: flex; /* 버튼을 수평으로 배치 */
+  justify-content: space-between; /* 공간 균등 배치 */
+}
+
+.profileActions button {
+  padding: 10px 15px; /* 내부 여백 */
+  background-color: #0070f3; /* 기본 배경 색상 */
+  color: #fff; /* 글자 색상 흰색 */
+  border: none; /* 기본 테두리 제거 */
+  border-radius: 5px; /* 둥근 모서리 */
+  cursor: pointer; /* 커서 포인터 */
+  transition: background-color 0.3s ease; /* 부드러운 색상 변화 */
+}
+
+.profileActions button:hover {
+  background-color: #005bb5; /* 호버 시 색상 변화 */
+}
+
+hr {
+  border: none; /* 기본 경계 제거 */
+  border-top: 1px solid #e0e0e0; /* 상단 경계 추가 */
+  margin: 20px 0; /* 여백 */
+}
+
+.error {
+  color: red; /* 에러 메시지 색상 */
+  font-weight: bold; /* 에러 메시지 강조 */
+}

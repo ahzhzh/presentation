@@ -1,0 +1,89 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    color: #000;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.faq-item {
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 35px 0;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    position: relative;
+    width: 100%;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 18px;
+}
+
+.faq-answer {
+    overflow: hidden;
+    padding: 0 15px;
+    color: #000;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.faq-answer.open {
+    max-height: 300px;
+    opacity: 1;
+    padding: 10px 15px;
+}
+
+.toggle-icon {
+    transition: transform 0.3s;
+}
+
+.toggle-icon.rotated {
+    transform: rotate(180deg);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s; /* 추가된 부분 */
+}
+
+.page-button:hover {
+    transform: scale(1.20); /* 호버 시 확대 효과 */
+}
+
+.page-button.active {
+    background-color: #0070f3;
+    color: #fff;
+    transform: scale(1.05); /* 선택된 버튼 확대 효과 */
+}

@@ -29,14 +29,14 @@ const Alert = ({ preview }: Props) => {
             </>
           ) : (
             <>
-              현재 이 사이트는 테스트 사이트 입니다{" "}
+              
               <a
                 href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
                 className="underline hover:text-blue-600 duration-200 transition-colors"
               >
-                돌아가기
+             
               </a>
-              .
+              
             </>
           )}
         </div>

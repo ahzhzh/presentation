@@ -1,18 +1,20 @@
 /* src/app/globals.css */
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #111;
-  }
-  
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-  
+/*배경 CSS*/
 
-  
-  /* 필요에 따라 추가 스타일을 정의 */
-  
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000; 
+  background-size: cover; /* 배경 이미지를 화면에 맞게 늘립니다 */
+ 
+  background-attachment: fixed; /* 배경을 고정합니다 */
+  color: #111;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 필요에 따라 추가 스타일을 정의 */

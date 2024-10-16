@@ -3,6 +3,8 @@ import CoverImage from "@/app/_components/cover-image";
 import { type Author } from "@/interfaces/author";
 import Link from "next/link";
 import DateFormatter from "./date-formatter";
+import './Profile.css';
+import './guide.css';
 
 type Props = {
   title: string;
@@ -23,23 +25,21 @@ export function HeroPost({
 }: Props) {
   return (
     <section>
-      <div className="mb-8 md:mb-16">
-        <CoverImage title={title} src={coverImage} slug={slug} />
-      </div>
-      <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
+      <h1><CoverImage title={title} src={coverImage} slug={slug} /></h1>   
+      <div className="profileContainer">
         <div>
-          <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
+          <h3>
             <Link href={`/posts/${slug}`} className="hover:underline">
               {title}
             </Link>
           </h3>
-          <div className="mb-4 md:mb-0 text-lg">
+          <div>
             <DateFormatter dateString={date} />
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          <Avatar name={author.name} picture={author.picture} />
+          <p>{excerpt}</p>
+        
         </div>
       </div>
     </section>

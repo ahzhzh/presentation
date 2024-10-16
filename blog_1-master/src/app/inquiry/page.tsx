@@ -1,36 +1,60 @@
 "use client"; 
 
-import { useState } from 'react';
-import './inquiry.css'; // CSS 파일 import
+import { useState, useEffect } from 'react';
+import { db, auth } from '../_components/firebaseConfig'; 
+import { collection, addDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import './inquiry.css'; 
 
 const InquiryPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [inquiryType, setInquiryType] = useState(''); // 문의 종류 상태 추가
+  const [inquiryType, setInquiryType] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    const isLoggedIn = false; // 로그인 상태 확인 로직 (여기서는 예시로 false로 설정)
 
     if (!isLoggedIn) {
-      alert('로그인을 먼저 진행해주세요.'); // 로그인 요청 알림
-      return; // 폼 제출 중단
+      alert('로그인을 먼저 진행해주세요.');
+      return;
     }
 
-    console.log({ name, email, inquiryType, message }); // 문의 정보 로그
-
-    // 폼 초기화
-    setName('');
-    setEmail('');
-    setInquiryType('');
-    setMessage('');
-    alert('문의가 제출되었습니다!');
+    try {
+      await addDoc(collection(db, 'inquiries'), {
+        name,
+        email,
+        inquiryType,
+        message,
+        timestamp: new Date(),
+      });
+      alert('문의가 제출되었습니다!');
+      setName('');
+      setEmail('');
+      setInquiryType('');
+      setMessage('');
+    } catch (error) {
+      console.error('Error adding document: ', error);
+      alert('문의 제출에 실패했습니다.');
+    }
   };
 
   return (
     <div className="formContainer">
+      <h1 className="inquiry-title">문의</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -43,13 +67,13 @@ const InquiryPage = () => {
         <input
           type="email"
           className="inputField"
-          placeholder="이메일"
+          placeholder="이메일 (답변은 이메일로 전송됩니다)"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <select
-          className="inputField" // 스타일 적용을 위해 같은 클래스를 사용
+          className="selectField"
           value={inquiryType}
           onChange={(e) => setInquiryType(e.target.value)}
           required

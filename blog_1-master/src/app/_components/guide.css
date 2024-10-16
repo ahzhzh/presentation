@@ -3,7 +3,7 @@ body {
     font-size: 16px; /* 기본 글씨 크기 */
     margin: 0;
     padding: 0;
-    
+    background-color: #f4f4f4; /* 배경색 */
     color: #333; /* 기본 글씨색 */
 }
 h1 {

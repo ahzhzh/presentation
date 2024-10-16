@@ -1,13 +1,9 @@
 "use client"; 
 
 import React, { useState, useEffect } from 'react';
-
-interface User {
-  email: string;
-  password: string;
-  name?: string; // 이름 추가
-  phoneNumber?: string; // 전화번호 추가
-}
+import { auth, db } from '../_components/firebaseConfig'; // Firebase 설정을 임포트
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from 'firebase/firestore';
 
 const Login = () => {
   const [emailLogin, setEmailLogin] = useState('');
@@ -20,85 +16,51 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [isError, setIsError] = useState(false);
-  
-  const getRegisteredUser = (): User | null => {
-    const userData = localStorage.getItem('registeredUser');
-    return userData ? JSON.parse(userData) : null;
-  };
 
-  useEffect(() => {
-    const user = getRegisteredUser();
-    if (user) {
-      setEmailRegister(user.email);
-      setPasswordRegister(user.password);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (activeForm === 'login') {
-      setEmailLogin('');
-      setPasswordLogin('');
-    } else {
-      setEmailRegister('');
-      setPasswordRegister('');
-      setNameRegister(''); // 이름 초기화
-      setPhoneNumberRegister(''); // 전화번호 초기화
-    }
-  }, [activeForm]);
-
-  const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const registeredUser = getRegisteredUser();
-
-    const isSuccess = registeredUser && 
-                      emailLogin === registeredUser.email && 
-                      passwordLogin === registeredUser.password;
-
-    if (isSuccess) {
+    try {
+      await signInWithEmailAndPassword(auth, emailLogin, passwordLogin);
       setMessage('로그인 완료!');
       setIsError(false);
       setShowAlert(true);
 
-      const token = 'your_auth_token';
+      const token = 'your_auth_token'; // 실제 토큰으로 교체
       localStorage.setItem('token', token);
 
       setTimeout(() => {
         window.location.href = '/';
       }, 1500);
-    } else {
+    } catch (error) {
       setMessage('로그인 실패! 다시 시도해 주세요.');
       setIsError(true);
       setShowAlert(true);
     }
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegisterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const registeredUser = getRegisteredUser();
+    try {
+      // Firebase Auth로 사용자 등록
+      await createUserWithEmailAndPassword(auth, emailRegister, passwordRegister);
 
-    if (registeredUser && emailRegister === registeredUser.email) {
-      setMessage('이미 가입된 이메일입니다. 로그인해주세요.');
+      // Firestore에 사용자 정보 추가
+      const newUser = {
+        email: emailRegister,
+        name: nameRegister,
+        phoneNumber: phoneNumberRegister
+      };
+      const userDocRef = doc(db, 'users', emailRegister); // 이메일을 문서 ID로 사용
+      await setDoc(userDocRef, newUser); // Firestore에 데이터 추가
+
+      setMessage('회원가입 완료! 로그인해주세요.');
+      setIsError(false);
+      setShowAlert(true);
+    } catch (error) {
+      setMessage('회원가입 실패! 다시 시도해 주세요.');
       setIsError(true);
       setShowAlert(true);
-      return;
     }
-
-    const newUser: User = { 
-      email: emailRegister, 
-      password: passwordRegister,
-      name: nameRegister, // 이름 추가
-      phoneNumber: phoneNumberRegister // 전화번호 추가
-    };
-    localStorage.setItem('registeredUser', JSON.stringify(newUser));
-
-    setMessage('회원가입 완료! 로그인해주세요.');
-    setIsError(false);
-    setShowAlert(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setShowAlert(true);
   };
 
   const handleAlertConfirm = () => {
@@ -206,7 +168,7 @@ const Login = () => {
         </form>
       )}
 
-{showAlert && (
+      {showAlert && (
         <div 
           id="alert-modal" 
           className="alert-modal" 
@@ -307,8 +269,7 @@ const Login = () => {
           min-height: 120px;
         }
 
-        .
-                .confirm-button {
+        .confirm-button {
           padding: 10px 20px;
           background-color: #0070f3;
           color: white;

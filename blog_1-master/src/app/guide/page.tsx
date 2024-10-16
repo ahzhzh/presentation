@@ -5,19 +5,10 @@ const Guide = () => {
   return (
     <div>
       <Head>
-        <title>프로그램 가이드</title>
-        <meta name="description" content="프로그램 가이드 페이지입니다." />
+        <title></title>
+      
       </Head>
 
-      <nav className="horizontal-nav">
-        <ul>
-          <li><a href="#overview">개요</a></li>
-          <li><a href="#installation">설치 방법</a></li>
-          <li><a href="#features">주요 기능</a></li>
-          <li><a href="#user-guide">사용자 가이드</a></li>
-          <li><a href="#troubleshooting">문제 해결</a></li>
-        </ul>
-      </nav>
 
       <h1>프로그램 가이드</h1>
       

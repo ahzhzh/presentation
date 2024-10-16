@@ -1,0 +1,98 @@
+.faq-background {
+  padding: 0px 20px;
+  display: flex; /* Flexbox 사용 */
+  justify-content: center; /* 수평 중앙 정렬 */
+}
+
+.faq-container {
+  margin-top: 5px;
+  width: 68%; /* 부모의 너비를 68%로 설정 */
+}
+
+.logo {
+  margin-bottom: 30px;
+  display: block;
+  transform: translate(-20px, -20px);
+}
+
+.logo-image {
+  width: 150px; /* 원하는 너비로 조정 */
+  height: auto; /* 비율에 맞게 높이 자동 조정 */
+}
+
+.faq-title {
+  color: #000;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 0;
+  margin-bottom: 30px;
+  width: 103% ; /* 구분선의 길이를 박스와 맞춤 */
+}
+
+.faq-item {
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 35px 0; /* 상하 15px 여백 설정, 좌우 여백 제거 */
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+  position: relative;
+  width: 100%; /* 박스 길이를 조정하여 좌우 여백에 맞춤 */
+}
+
+.faq-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 18px;
+}
+
+.icon {
+  transition: transform 0.3s;
+}
+
+.faq-answer {
+  overflow: hidden;
+  padding: 0 15px;
+  color: #000;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.faq-answer.open {
+  max-height: 300px;
+  opacity: 1;
+  padding: 10px 15px;
+}
+
+.arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+  transition: transform 0.3s;
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.arrow.rotate {
+  transform: translateY(-50%) rotate(180deg);
+}
