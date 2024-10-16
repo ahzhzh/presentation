@@ -39,7 +39,7 @@ export function Intro() {
           <Link href="/faq" className="menu-button mr-4">
             FAQ
           </Link>
-          <Link href="/contact" className="menu-button mr-4">
+          <Link href="/inquiry" className="menu-button mr-4">
             문의
           </Link>
           <Link href="/notification" className="menu-button mr-4">

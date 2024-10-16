@@ -7,7 +7,6 @@ const Guide = () => {
       <Head>
         <title>프로그램 가이드</title>
         <meta name="description" content="프로그램 가이드 페이지입니다." />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
 
       <nav className="horizontal-nav">
